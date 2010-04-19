@@ -1,0 +1,30 @@
+<% 
+# Define some "helpers" here
+
+def issue_status_swimlane(swimlane_name)
+    selected_status = @settings[swimlane_name] && @settings[swimlane_name]['status_id'] ? @settings[swimlane_name]['status_id'].to_i : 0
+    status = content_tag(:p,
+      content_tag(:label, l("simple_kanban_label_#{swimlane_name}".to_sym)) + 
+      select_tag("settings[#{swimlane_name}][status_id]",
+                 content_tag(:option, '') +
+                 options_from_collection_for_select(IssueStatus.all(:order => 'position ASC'),
+                                                    :id,
+                                                    :name,
+                                                    selected_status)))
+
+      return status
+
+end
+%>
+
+<fieldset>
+  <%= content_tag(:legend, l(:simple_kanban_text_general_settings)) %>
+
+  <%= content_tag(:p, l(:simple_kanban_text_swimlane_settings_description)) %>
+
+  <%= issue_status_swimlane('next_swimlane') %>
+  <%= issue_status_swimlane('in_progress_swimlane') %>
+  <%= issue_status_swimlane('acceptance_swimlane') %>
+  <%= issue_status_swimlane('done_swimlane') %>
+
+</fieldset>

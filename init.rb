@@ -10,6 +10,15 @@ Redmine::Plugin.register :redmine_simple_kanban do
   version '0.1.0'
 
   requires_redmine :version_or_higher => '0.9.0'
+
+  settings(:partial => 'settings/simple_kanban_settings',
+           :default => {
+             'next_swimlane' => { 'status_id' => nil},
+             'in_progress_swimlane' => { 'status_id' => nil},
+             'acceptance_swimlane' => { 'status_id' => nil},
+             'done_swimlane' => { 'status_id' => nil}
+           })
+
 end
 require 'redmine_simple_kanban/hooks/view_issues_form_details_bottom_hook'
 require 'redmine_simple_kanban/hooks/controller_issues_edit_before_save_hook'
