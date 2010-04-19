@@ -1,1 +1,38 @@
-<h2>SimpleKanbans#show</h2>
+<h2><%= l(:simple_kanban_title) %></h2>
+
+<div id="kanban-board">
+  <div class="swimlane" id="next-swimlane">
+    <%= content_tag(:h3, l(:simple_kanban_label_next_swimlane)) %>
+    <div>
+      swimlane
+    </div
+  </div>
+
+  <div class="swimlane" id="in-progress-swimlane">
+    <%= content_tag(:h3, l(:simple_kanban_label_in_progress_swimlane)) %>
+    <div>
+      swimlane
+    </div>
+  </div>
+
+  <div class="swimlane" id="acceptance-swimlane">
+    <%= content_tag(:h3, l(:simple_kanban_label_acceptance_swimlane)) %>
+    <div>
+      swimlane
+    </div>
+  </div>
+
+  <div class="swimlane" id="done-swimlane">
+    <%= content_tag(:h3, l(:simple_kanban_label_done_swimlane)) %>
+    <div>
+      swimlane
+    </div>
+  </div>
+
+</div>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'redmine_simple_kanban.css', :plugin => "redmine_simple_kanban" %>
+<% end %>
+
+<% html_title l(:simple_kanban_title) %>

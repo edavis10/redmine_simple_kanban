@@ -1,0 +1,10 @@
+#kanban-board {background: #eee; min-height: 400px;}
+#next-swimlane {}
+#in-progress-swimlane {}
+#acceptance-swimlane {}
+#done-swimlane {}
+
+.swimlane {border: #444 solid 2px; width: 25%; float: left; min-height: 400px; margin: 0 -2px;}
+.swimlane h3 { margin: 0 10px; }
+.swimlane div { margin: 10px; }
+
