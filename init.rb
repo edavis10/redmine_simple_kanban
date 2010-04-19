@@ -19,6 +19,11 @@ Redmine::Plugin.register :redmine_simple_kanban do
              'done_swimlane' => { 'status_id' => nil}
            })
 
+  menu(:top_menu,
+       :simple_kanban,
+       {:controller => 'simple_kanbans', :action => 'show'},
+       :caption => :simple_kanban_title)
+
 end
 require 'redmine_simple_kanban/hooks/view_issues_form_details_bottom_hook'
 require 'redmine_simple_kanban/hooks/controller_issues_edit_before_save_hook'

@@ -7,4 +7,5 @@ en:
   simple_kanban_label_in_progress_swimlane: "In Progress Swimlane"
   simple_kanban_label_acceptance_swimlane: "Acceptance Swimlane"
   simple_kanban_label_done_swimlane: "Done Swimlane"
+  simple_kanban_title: Simple Kanban
 
