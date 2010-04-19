@@ -11,3 +11,6 @@ Redmine::Plugin.register :redmine_simple_kanban do
 
   requires_redmine :version_or_higher => '0.9.0'
 end
+require 'redmine_simple_kanban/hooks/view_issues_form_details_bottom_hook'
+require 'redmine_simple_kanban/hooks/controller_issues_edit_before_save_hook'
+require 'redmine_simple_kanban/hooks/view_issues_show_details_bottom_hook'

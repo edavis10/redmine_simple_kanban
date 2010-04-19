@@ -1,0 +1,7 @@
+<div class="splitcontentleft">
+  <% fields_for :issue, issue, :builder => TabularFormBuilder do |f| %>
+    <p><%= f.check_box :kanban_blocked %></p>
+  <% end %>
+</div>
+
+<div style="clear:both;"> </div>
