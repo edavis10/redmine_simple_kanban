@@ -1,0 +1,15 @@
+<% div_for issue, :class => '' do %>
+  <p class="issue-dates">
+    <span class="issue-start-date"><%= h(issue.start_date) -%></span>
+    <span class="issue-end-date"><%= h(issue.due_date) -%></span>
+  </p>
+  
+  <p>
+    <%= link_to_issue(issue) %>
+  </p>
+
+  <p class="assigned-to">
+    <%= l(:field_assigned_to) %>: <%= link_to_user(issue.assigned_to) %>
+    <%= avatar(issue.assigned_to, :size => "14") %>
+  </p>
+<% end %>
