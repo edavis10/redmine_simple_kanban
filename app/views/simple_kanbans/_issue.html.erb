@@ -14,8 +14,10 @@
     <%= link_to_issue(issue) %>
   </p>
 
+  <% if issue.assigned_to.present? %>
   <p class="assigned-to">
     <%= l(:field_assigned_to) %>: <%= link_to_user(issue.assigned_to) %>
     <%= avatar(issue.assigned_to, :size => "14") %>
   </p>
+  <% end %>
 <% end %>
