@@ -8,6 +8,8 @@ module RedmineSimpleKanban
         base.class_eval do
           unloadable
 
+          named_scope :includes_for_simple_kanban, :include => [:status, :priority, :tracker, :assigned_to]
+
           named_scope :order_for_simple_kanban, :order => "#{Issue.table_name}.start_date ASC"
           named_scope :order_for_simple_kanban_next, :order => "#{Issue.table_name}.expedite DESC, #{Issue.table_name}.due_date ASC, #{Issue.table_name}.start_date ASC"
 
