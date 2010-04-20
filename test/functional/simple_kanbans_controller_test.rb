@@ -9,7 +9,9 @@ class SimpleKanbansControllerTest < ActionController::TestCase
       
       @next_1 = Issue.generate_for_project!(@project_1, :status => @next_status)
       @next_2 = Issue.generate_for_project!(@project_2, :status => @next_status)
-      @next_issues = [@next_1, @next_2]
+      @next_3 = Issue.generate_for_project!(@project_2, :status => @next_status)
+      @next_4 = Issue.generate_for_project!(@project_2, :status => @next_status)
+      @next_issues = [@next_1, @next_2, @next_3]
 
       @progress_1 = Issue.generate_for_project!(@project_1, :status => @in_progress_status)
       @progress_2 = Issue.generate_for_project!(@project_2, :status => @in_progress_status)
