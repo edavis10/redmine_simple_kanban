@@ -21,9 +21,10 @@ class SimpleKanbansControllerTest < ActionController::TestCase
       @acceptance_2 = Issue.generate_for_project!(@project_2, :status => @acceptance_status)
       @acceptance_issues = [@acceptance_1, @acceptance_2]
 
-      @done_1 = Issue.generate_for_project!(@project_1, :status => @done_status)
-      @done_2 = Issue.generate_for_project!(@project_2, :status => @done_status)
-      @done_issues = [@done_1, @done_2]
+      @done_1 = Issue.generate_for_project!(@project_1, :status => @done_status, :updated_on => 2.days.ago)
+      @done_2 = Issue.generate_for_project!(@project_2, :status => @done_status, :updated_on => Date.today.beginning_of_day + 6.hours)
+      @done_3 = Issue.generate_for_project!(@project_2, :status => @done_status, :updated_on => Date.today.beginning_of_day + 1.hour)
+      @done_issues = [@done_2, @done_3]
 
       @user = User.generate_with_protected!
       @request.session[:user_id] = @user.id

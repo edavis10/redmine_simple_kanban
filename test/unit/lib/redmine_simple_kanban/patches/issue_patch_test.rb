@@ -6,5 +6,6 @@ class RedmineSimpleKanban::Patches::IssueTest < ActionController::TestCase
   context "Issue" do
     should_have_named_scope :order_for_simple_kanban, :order => "issues.start_date ASC"
     should_have_named_scope :order_for_simple_kanban_next, :order => "issues.expedite DESC, issues.due_date ASC, issues.start_date ASC"
+    should_have_named_scope :updated_today, :conditions => ["issues.updated_on > ?", Date.today.beginning_of_day]
   end
 end
