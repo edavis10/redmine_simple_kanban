@@ -28,3 +28,9 @@ end
 require 'redmine_simple_kanban/hooks/view_issues_form_details_bottom_hook'
 require 'redmine_simple_kanban/hooks/controller_issues_edit_before_save_hook'
 require 'redmine_simple_kanban/hooks/view_issues_show_details_bottom_hook'
+require 'dispatcher'
+Dispatcher.to_prepare :redmine_simple_kanban do
+
+  require_dependency 'issue'
+  Issue.send(:include, RedmineSimpleKanban::Patches::IssuePatch)
+end
