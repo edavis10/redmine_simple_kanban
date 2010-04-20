@@ -23,6 +23,10 @@ module RedmineSimpleKanban
               :conditions => ["#{Issue.table_name}.updated_on > ?", Date.today.beginning_of_day]
             }
           }
+
+          def self.for_simple_kanban_swimlane(status_id_for_swimlane)
+            visible.order_for_simple_kanban.includes_for_simple_kanban.with_status_id(status_id_for_swimlane)
+          end
         end
       end
 
