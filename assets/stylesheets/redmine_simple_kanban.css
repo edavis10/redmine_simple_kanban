@@ -8,5 +8,7 @@
 .swimlane h3 { margin: 0 10px; }
 .swimlane div { margin: 10px; }
 
+.issue.blocked { background: url(../images/blocked.png)}
+
 p.issue-dates { margin: 0; font-size: smaller;}
 .issue-end-date {color: red; float: right; }

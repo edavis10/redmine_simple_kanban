@@ -1,4 +1,4 @@
-<% div_for issue, :class => '' do %>
+<% div_for issue, :class => issue.kanban_blocked? ? 'blocked' : '' do %>
   <p class="issue-dates">
     <span class="issue-start-date"><%= h(issue.start_date) -%></span>
     <span class="issue-end-date"><%= h(issue.due_date) -%></span>
