@@ -9,6 +9,7 @@
 .swimlane div { margin: 10px; }
 
 .issue.blocked { background: url(../images/blocked.png)}
+#kanban-board .issue .expedite img { float: right; }
 
 p.issue-dates { margin: 0; font-size: smaller;}
 .issue-end-date {color: red; float: right; }

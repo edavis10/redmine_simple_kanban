@@ -26,5 +26,14 @@ class RedmineSimpleKanban::Hooks::ViewIssuesShowDetailsBottomTest < ActionContro
         assert_select 'td.kanban-blocked', :text => 'No'
       end
     end
+
+    should "return a table row for the expedite field" do
+      @response.body = hook
+
+      assert_select 'tr' do
+        assert_select 'th.expedite', :text => 'Expedite'
+        assert_select 'td.expedite', :text => 'No'
+      end
+    end
   end
 end

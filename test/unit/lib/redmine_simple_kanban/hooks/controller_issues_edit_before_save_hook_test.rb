@@ -43,5 +43,27 @@ class RedmineSimpleKanban::Hooks::ControllerIssuesEditBeforeSaveTest < ActionCon
 
       end
     end
+
+    context "without a expedite parameter" do
+      should "do nothing to the issue" do
+        pre = @issue.expedite
+        hook(:issue => @issue, :params => {})
+        post = @issue.reload.expedite
+
+        assert_equal pre, post, "field changed"
+      end
+    end
+
+    context "with a expedite parameter" do
+      should "set the issue's value" do
+        pre = @issue.expedite
+        hook(:issue => @issue, :params => { :issue => {:expedite => '1'}})
+        post = @issue.expedite
+
+        assert_not_equal pre, post, "field did not change"
+
+      end
+    end
+
   end
 end

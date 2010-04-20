@@ -4,6 +4,12 @@
     <span class="issue-end-date"><%= h(issue.due_date) -%></span>
   </p>
   
+  <% if issue.expedite? %>
+  <p class="expedite">
+    <%= image_tag('star.png', :alt => l(:simple_kanban_text_expedite_issue), :title => l(:simple_kanban_text_expedite_issue), :plugin => 'redmine_simple_kanban') %>
+  </p>
+  <% end %>
+
   <p>
     <%= link_to_issue(issue) %>
   </p>

@@ -11,6 +11,10 @@ module RedmineSimpleKanban
         if params && params[:issue] && params[:issue][:kanban_blocked].present?
           context[:issue].kanban_blocked = params[:issue][:kanban_blocked]
         end
+
+        if params && params[:issue] && params[:issue][:expedite].present?
+          context[:issue].expedite = params[:issue][:expedite]
+        end
       end
     end
   end
