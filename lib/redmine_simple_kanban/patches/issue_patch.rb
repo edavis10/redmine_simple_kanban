@@ -8,6 +8,8 @@ module RedmineSimpleKanban
         base.class_eval do
           unloadable
 
+          acts_as_taggable_on :skills
+          
           named_scope :includes_for_simple_kanban, :include => [:status, :priority, :tracker, :assigned_to]
           named_scope :with_status_id, lambda {|status_id|
             {

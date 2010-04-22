@@ -1,3 +1,5 @@
+config.gem "acts-as-taggable-on", :version => '2.0.4'
+
 require 'redmine'
 
 Redmine::Plugin.register :redmine_simple_kanban do
