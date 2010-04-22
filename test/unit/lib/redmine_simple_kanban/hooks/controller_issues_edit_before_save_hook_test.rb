@@ -19,8 +19,10 @@ class RedmineSimpleKanban::Hooks::ControllerIssuesEditBeforeSaveTest < ActionCon
 
   context "#controller_issues_edit_before_save" do
     setup do
+      @user = User.generate!
       @project = Project.generate!
       @issue = Issue.generate_for_project!(@project)
+      @issue.init_journal(@user)
     end
 
     context "without a kanban_blocked parameter" do
@@ -83,6 +85,22 @@ class RedmineSimpleKanban::Hooks::ControllerIssuesEditBeforeSaveTest < ActionCon
 
         assert_not_equal pre, post, "field did not change"
 
+      end
+
+      should "log the change to the issue's journals" do
+        hook(:issue => @issue, :params => { :issue => {:skill_list => 'ruby,rails'}})
+
+        assert @issue.save
+        @issue.reload
+        
+        last_journal = @issue.journals.last
+        assert last_journal
+        assert_equal 1, last_journal.details.size
+        last_journal_details = last_journal.details.first
+        assert_equal 'skill_list', last_journal_details.prop_key
+        assert_equal 'ruby,rails', last_journal_details.value
+        assert_equal '', last_journal_details.old_value
+        
       end
     end
   end

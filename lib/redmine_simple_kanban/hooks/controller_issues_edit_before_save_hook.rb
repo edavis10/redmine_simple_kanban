@@ -17,7 +17,13 @@ module RedmineSimpleKanban
         end
 
         if params && params[:issue] && params[:issue][:skill_list].present?
-          context[:issue].skill_list = params[:issue][:skill_list]
+          old_skill_list = context[:issue].skill_list
+          new_skill_list = params[:issue][:skill_list]
+          context[:issue].skill_list = new_skill_list
+          context[:issue].current_journal.details << JournalDetail.new(:property => 'attr',
+                                                                       :prop_key => 'skill_list',
+                                                                       :old_value => old_skill_list.to_s,
+                                                                       :value => new_skill_list.to_s) unless old_skill_list == new_skill_list || context[:issue].current_journal.blank?
         end
         
         return ''
