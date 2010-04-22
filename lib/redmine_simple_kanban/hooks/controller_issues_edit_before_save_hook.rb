@@ -15,6 +15,12 @@ module RedmineSimpleKanban
         if params && params[:issue] && params[:issue][:expedite].present?
           context[:issue].expedite = params[:issue][:expedite]
         end
+
+        if params && params[:issue] && params[:issue][:skill_list].present?
+          context[:issue].skill_list = params[:issue][:skill_list]
+        end
+        
+        return ''
       end
     end
   end

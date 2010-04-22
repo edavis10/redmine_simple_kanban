@@ -65,5 +65,25 @@ class RedmineSimpleKanban::Hooks::ControllerIssuesEditBeforeSaveTest < ActionCon
       end
     end
 
+    context "without a skill list parameter" do
+      should "do nothing to the issue" do
+        pre = @issue.skill_list
+        hook(:issue => @issue, :params => {})
+        post = @issue.reload.skill_list
+
+        assert_equal pre, post, "field changed"
+      end
+    end
+
+    context "with a skill list parameter" do
+      should "set the issue's value" do
+        pre = @issue.skill_list
+        hook(:issue => @issue, :params => { :issue => {:skill_list => 'ruby,rails,'}})
+        post = @issue.skill_list
+
+        assert_not_equal pre, post, "field did not change"
+
+      end
+    end
   end
 end
