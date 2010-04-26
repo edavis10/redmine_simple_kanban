@@ -34,8 +34,10 @@ require 'redmine_simple_kanban/hooks/view_issues_show_description_bottom_hook'
 
 require 'dispatcher'
 Dispatcher.to_prepare :redmine_simple_kanban do
+  require_dependency 'principal'
+  require_dependency 'user'
+  User.send(:include, RedmineSimpleKanban::Patches::UserPatch)
 
   require_dependency 'issue'
   Issue.send(:include, RedmineSimpleKanban::Patches::IssuePatch)
 end
-
