@@ -38,8 +38,10 @@ require 'redmine_simple_kanban/hooks/view_users_form_hook'
 require 'dispatcher'
 Dispatcher.to_prepare :redmine_simple_kanban do
   require_dependency 'principal'
+  Principal.send(:include, RedmineSimpleKanban::Patches::PrincipalPatch)
   require_dependency 'user'
   User.send(:include, RedmineSimpleKanban::Patches::UserPatch)
+  AnonymousUser.send(:include, RedmineSimpleKanban::Patches::UserPatch)
 
   require_dependency 'issue'
   Issue.send(:include, RedmineSimpleKanban::Patches::IssuePatch)
