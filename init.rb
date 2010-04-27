@@ -33,6 +33,7 @@ require 'redmine_simple_kanban/hooks/view_issues_show_details_bottom_hook'
 require 'redmine_simple_kanban/hooks/view_issues_show_description_bottom_hook'
 
 require 'redmine_simple_kanban/hooks/view_account_left_bottom_hook'
+require 'redmine_simple_kanban/hooks/view_users_form_hook'
 
 require 'dispatcher'
 Dispatcher.to_prepare :redmine_simple_kanban do
@@ -43,4 +44,5 @@ Dispatcher.to_prepare :redmine_simple_kanban do
   require_dependency 'issue'
   Issue.send(:include, RedmineSimpleKanban::Patches::IssuePatch)
 end
+
 
