@@ -4,7 +4,7 @@ class SimpleKanbanTest < ActiveSupport::TestCase
   context "SimpleKanban#next_issue" do
     setup do
       configure_plugin
-      User.current = @user = User.generate_with_protected!
+      User.current = @user = User.generate_with_protected!(:skill_list => ['ruby','rails','mysql'])
 
       @project = Project.generate!
       @role = Role.generate!(:permissions => [:view_issues])
@@ -19,8 +19,14 @@ class SimpleKanbanTest < ActiveSupport::TestCase
 
       @next_issue_non_expedite = Issue.generate_for_project!(@project, :subject => 'Not Expedite', :status => @next_status, :due_date => Date.tomorrow)
       @assigned_next_issue = Issue.generate_for_project!(@project, :subject => 'Next issue', :status => @next_status, :due_date => Date.tomorrow, :expedite => true, :assigned_to => @user)
-      @next_issue = Issue.generate_for_project!(@project, :subject => 'Next issue', :status => @next_status, :due_date => Date.tomorrow, :expedite => true, :assigned_to => nil)
+
+      @next_issue_with_non_matching_skill = Issue.generate_for_project!(@project, :subject => 'Next issue', :status => @next_status, :due_date => Date.tomorrow, :expedite => true, :assigned_to => nil)
+      @next_issue_with_non_matching_skill.skill_list = ['ruby', 'python']
+      @next_issue_with_non_matching_skill.save!
       
+      @next_issue = Issue.generate_for_project!(@project, :subject => 'Next issue', :status => @next_status, :due_date => Date.tomorrow, :expedite => true, :assigned_to => nil)
+      @next_issue.skill_list = ['ruby','rails']
+      @next_issue.save!
     end
 
     should "find an issue that is visible" do
@@ -57,6 +63,14 @@ class SimpleKanbanTest < ActiveSupport::TestCase
       response = SimpleKanban.next_issue
       assert response, "No issue returned"
       assert_equal nil, response.assigned_to
+    end
+
+    should "match skill requirements to a user" do
+      response = SimpleKanban.next_issue
+      assert response, "No issue returned"
+      assert_equal @next_issue, response
+      assert_contains(response.skill_list, 'ruby')
+      assert_contains(response.skill_list, 'rails')
     end
   end
 end
