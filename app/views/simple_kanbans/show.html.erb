@@ -1,5 +1,15 @@
 <h2><%= l(:simple_kanban_title) %></h2>
 
+
+
+<div id="next-issue" class="<%= @next_issue.css_classes %> details">
+  <h2><%= l(:simple_kanban_text_next_issue) %></h2
+  <%= content_tag(:h3, link_to_issue(@next_issue, :project => true)) %>
+  <div class="description">
+    <%= textilizable(@next_issue, :description) %>
+  </div>
+</div>
+
 <div id="kanban-board">
   <div class="swimlane" id="next-swimlane">
     <%= content_tag(:h3, l(:simple_kanban_label_next_swimlane)) %>

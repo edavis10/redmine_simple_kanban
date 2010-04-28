@@ -43,5 +43,10 @@ class SimpleKanbansControllerTest < ActionController::TestCase
     should_assign_to(:in_progress_issues) {@in_progress_issues}
     should_assign_to(:acceptance_issues) {@acceptance_issues}
     should_assign_to(:done_issues) {@done_issues}
+    should_assign_to(:next_issue) {@next_1}
+
+    should "show the next issue" do
+      assert_select "div#next-issue", :text => /#{@next_1.subject}/
+    end
   end
 end

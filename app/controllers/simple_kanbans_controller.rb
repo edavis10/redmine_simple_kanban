@@ -7,6 +7,8 @@ class SimpleKanbansController < ApplicationController
     @in_progress_issues = Issue.for_simple_kanban_swimlane(status_id_for_swimlane('in_progress_swimlane'))
     @acceptance_issues = Issue.for_simple_kanban_swimlane(status_id_for_swimlane('acceptance_swimlane'))
     @done_issues = Issue.for_simple_kanban_swimlane(status_id_for_swimlane('done_swimlane')).updated_today
+
+    @next_issue = SimpleKanban.next_issue
   end
 
   private
