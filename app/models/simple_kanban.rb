@@ -5,7 +5,8 @@ class SimpleKanban
     
     Issue.visible.first(:conditions => {
                           :status_id => status_id,
-                          :kanban_blocked => false
+                          :kanban_blocked => false,
+                          :assigned_to_id => nil
                         },
                         :order => 'due_date ASC, expedite DESC')
   end

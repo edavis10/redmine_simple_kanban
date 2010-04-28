@@ -18,7 +18,8 @@ class SimpleKanbanTest < ActiveSupport::TestCase
       @later_next_issue = Issue.generate_for_project!(@project, :subject => 'Due later', :status => @next_status, :due_date => 3.days.from_now)
 
       @next_issue_non_expedite = Issue.generate_for_project!(@project, :subject => 'Not Expedite', :status => @next_status, :due_date => Date.tomorrow)
-      @next_issue = Issue.generate_for_project!(@project, :subject => 'Next issue', :status => @next_status, :due_date => Date.tomorrow, :expedite => true)
+      @assigned_next_issue = Issue.generate_for_project!(@project, :subject => 'Next issue', :status => @next_status, :due_date => Date.tomorrow, :expedite => true, :assigned_to => @user)
+      @next_issue = Issue.generate_for_project!(@project, :subject => 'Next issue', :status => @next_status, :due_date => Date.tomorrow, :expedite => true, :assigned_to => nil)
       
     end
 
@@ -52,8 +53,10 @@ class SimpleKanbanTest < ActiveSupport::TestCase
       assert_equal @next_issue, response
     end
 
-    context "with skill requirements" do
-      should "match skill requirements to a user"
+    should "find an unassigned issue" do
+      response = SimpleKanban.next_issue
+      assert response, "No issue returned"
+      assert_equal nil, response.assigned_to
     end
   end
 end
