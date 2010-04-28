@@ -11,7 +11,7 @@ class SimpleKanban
                                },
                                :order => 'due_date ASC, expedite DESC')
     # Match skills, a user must have all of the skills an issue requires
-    issues.select {|issue|
+    issues.detect {|issue|
       if issue.skill_list.blank?
         issue
       else
@@ -21,7 +21,7 @@ class SimpleKanban
           false
         end
       end
-    }.first
+    }
   end
 
   def self.next_status_id
