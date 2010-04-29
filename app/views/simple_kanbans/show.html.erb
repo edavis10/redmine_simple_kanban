@@ -12,15 +12,7 @@
   <% end %>
 </div>
 
-<div id="next-issue" class="<%= @next_issue.css_classes %> details">
-  <h2><%= l(:simple_kanban_text_next_issue) %></h2
-  <%= content_tag(:h3, link_to_issue(@next_issue, :project => true)) %>
-  <div class="description">
-    <%= textilizable(@next_issue, :description) %>
-  </div>
-</div>
-
-<%= render :partial => 'kanban_board' %>
+<%= render :partial => 'dashboard' %>
 
 <% content_for :header_tags do %>
   <%= stylesheet_link_tag 'redmine_simple_kanban.css', :plugin => "redmine_simple_kanban" %>

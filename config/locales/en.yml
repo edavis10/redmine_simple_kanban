@@ -13,5 +13,6 @@ en:
   field_skill_list: Skills
   simple_kanban_text_skills_required: Skills Required
   simple_kanban_text_next_issue: "Next Issue"
+  simple_kanban_text_next_issue_for: "Next Issue for {{user}}"
   simple_kanban_label_filter: Filter
   simple_kanban_label_filter_by: Filter by...

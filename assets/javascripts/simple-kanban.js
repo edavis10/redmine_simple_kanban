@@ -8,7 +8,7 @@ jQuery(function($) {
             url: 'simple_kanban.js',
             data: $('#filter').serialize(),
             success: function(response) {
-                $('#kanban-board').html(response);
+                $('#dashboard').html(response);
             },
             error: function(response) {
                 $("div.error").html("Error filtering pane.  Please refresh the page.").show();

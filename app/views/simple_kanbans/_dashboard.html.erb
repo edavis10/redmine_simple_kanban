@@ -1,0 +1,17 @@
+<div id="dashboard">
+
+<div id="next-issue" class="<%= @next_issue.css_classes if @next_issue %> issue details">
+  <%= next_issue_title %>
+  <% if @next_issue %>
+  <%= content_tag(:h3, link_to_issue(@next_issue, :project => true)) %>
+  <div class="description">
+    <%= textilizable(@next_issue, :description) %>
+  </div>
+  <% else %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+  <% end %>
+</div>
+
+<%= render :partial => 'kanban_board' %>
+
+</div>
