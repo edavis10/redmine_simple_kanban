@@ -16,3 +16,5 @@ p.issue-dates { margin: 0; font-size: smaller;}
 
 #next-issue {margin: 20px 0; }
 #next-issue .description {max-height: 200px; overflow-y: scroll;}
+
+#filter {margin: 20px 0; }

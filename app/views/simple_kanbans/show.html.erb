@@ -1,8 +1,4 @@
-<h2><%= l(:simple_kanban_title) %></h2>
-
-<div class="flash error" style="display:none"></div>
-
-<div class="filter">
+<div class="contextual filter">
   <% form_tag({}, :id => 'filter_form') do %>
     <label for="filter"><%= l(:simple_kanban_label_filter) %></label>
     <%= select_tag("filter",
@@ -11,6 +7,12 @@
                    
   <% end %>
 </div>
+
+<h2><%= l(:simple_kanban_title) %></h2>
+
+<div class="flash error" style="display:none"></div>
+
+<div style="clear:both;"></div>
 
 <%= render :partial => 'dashboard' %>
 
