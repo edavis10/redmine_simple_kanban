@@ -1,10 +1,12 @@
 class SimpleKanban
-  def self.next_issue
+  def self.next_issue(user=User.current)
     status_id = next_status_id
     return nil if status_id.nil?
     # OPTIMIZE: should be able to do this in one query instead of
     # pulling data back
-    issues = Issue.visible.all(:conditions => {
+    # Two visibles to make sure the issue is visible to both the
+    # current user and the user in question
+    issues = Issue.visible.visible(user).all(:conditions => {
                                  :status_id => status_id,
                                  :kanban_blocked => false,
                                  :assigned_to_id => nil
@@ -15,7 +17,7 @@ class SimpleKanban
       if issue.skill_list.blank?
         issue
       else
-        if issue.skill_list.all? {|skill| User.current.skill_list.include?(skill)}
+        if issue.skill_list.all? {|skill| user.skill_list.include?(skill)}
           issue
         else
           false
