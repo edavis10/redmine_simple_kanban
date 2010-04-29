@@ -26,6 +26,13 @@ module RedmineSimpleKanban
             }
           }
 
+          named_scope :assigned_to, lambda {|assigned_to|
+            id = (assigned_to.is_a?(Integer) || assigned_to.is_a?(String)) ? assigned_to : assigned_to.id
+            {
+              :conditions => ["#{Issue.table_name}.assigned_to_id = :id OR #{Issue.table_name}.assigned_to_id IS NULL", {:id => id}]
+            }
+          }
+
           def self.for_simple_kanban_swimlane(status_id_for_swimlane)
             visible.order_for_simple_kanban.includes_for_simple_kanban.with_status_id(status_id_for_swimlane)
           end

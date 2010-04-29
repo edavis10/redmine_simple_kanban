@@ -1,6 +1,16 @@
 <h2><%= l(:simple_kanban_title) %></h2>
 
+<div class="flash error" style="display:none"></div>
 
+<div class="filter">
+  <% form_tag({}, :id => 'filter_form') do %>
+    <label for="filter"><%= l(:simple_kanban_label_filter) %></label>
+    <%= select_tag("filter",
+                   options_for_select([[l(:simple_kanban_label_filter_by),'']]) +
+                   options_from_collection_for_select(User.active, :id, :name, params[:filter]), :include_blank => true) %>
+                   
+  <% end %>
+</div>
 
 <div id="next-issue" class="<%= @next_issue.css_classes %> details">
   <h2><%= l(:simple_kanban_text_next_issue) %></h2
@@ -10,39 +20,15 @@
   </div>
 </div>
 
-<div id="kanban-board">
-  <div class="swimlane" id="next-swimlane">
-    <%= content_tag(:h3, l(:simple_kanban_label_next_swimlane)) %>
-    <div>
-      <%= render :partial => 'issue', :collection => @next_issues %>
-    </div
-  </div>
-
-  <div class="swimlane" id="in-progress-swimlane">
-    <%= content_tag(:h3, l(:simple_kanban_label_in_progress_swimlane)) %>
-    <div>
-      <%= render :partial => 'issue', :collection => @in_progress_issues %>
-    </div>
-  </div>
-
-  <div class="swimlane" id="acceptance-swimlane">
-    <%= content_tag(:h3, l(:simple_kanban_label_acceptance_swimlane)) %>
-    <div>
-      <%= render :partial => 'issue', :collection => @acceptance_issues %>
-    </div>
-  </div>
-
-  <div class="swimlane" id="done-swimlane">
-    <%= content_tag(:h3, l(:simple_kanban_label_done_swimlane)) %>
-    <div>
-      <%= render :partial => 'issue', :collection => @done_issues %>
-    </div>
-  </div>
-
-</div>
+<%= render :partial => 'kanban_board' %>
 
 <% content_for :header_tags do %>
   <%= stylesheet_link_tag 'redmine_simple_kanban.css', :plugin => "redmine_simple_kanban" %>
+
+  <%= javascript_include_tag 'jquery-1.4.2.min.js', :plugin => 'redmine_simple_kanban' %>
+  <%= javascript_tag("jQuery.noConflict();") %>
+  <%= javascript_include_tag 'simple-kanban.js', :plugin => 'redmine_simple_kanban' %>
+  <%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
 <% end %>
 
 <% html_title l(:simple_kanban_title) %>
