@@ -27,4 +27,12 @@ end
   <%= issue_status_swimlane('acceptance_swimlane') %>
   <%= issue_status_swimlane('done_swimlane') %>
 
+  <%= content_tag(:p, l(:simple_kanban_text_target_project_description)) %>
+  <p>
+    <%= content_tag(:label, l(:simple_kanban_label_target_project)) %>
+    <%= select_tag("settings[target_project]",
+                   content_tag(:option, '') +
+                   options_from_collection_for_select(Project.active, :id, :name, @settings['target_project'].to_i)) %>
+  </p>
+
 </fieldset>

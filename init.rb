@@ -15,6 +15,7 @@ Redmine::Plugin.register :redmine_simple_kanban do
 
   settings(:partial => 'settings/simple_kanban_settings',
            :default => {
+             'target_project' => nil,
              'next_swimlane' => { 'status_id' => nil},
              'in_progress_swimlane' => { 'status_id' => nil},
              'acceptance_swimlane' => { 'status_id' => nil},

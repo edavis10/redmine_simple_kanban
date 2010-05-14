@@ -4,6 +4,7 @@ en:
   field_expedite: Expedite
   simple_kanban_text_general_settings: Settings
   simple_kanban_text_swimlane_settings_description: "Select the Issue Status to use for each swimlane on the Kanban Board."
+  simple_kanban_text_target_project_description: "Select the target project for new issues."
   simple_kanban_label_next_swimlane: "Next Swimlane"
   simple_kanban_label_in_progress_swimlane: "In Progress Swimlane"
   simple_kanban_label_acceptance_swimlane: "Acceptance Swimlane"
@@ -19,4 +20,4 @@ en:
   simple_kanban_text_take_issue: "Take issue"
   simple_kanban_label_issue_taken: "Issue taken."
   simple_kanban_label_issue_can_not_be_taken: "Issue could not be taken."
-
+  simple_kanban_label_target_project: "Target Project"
