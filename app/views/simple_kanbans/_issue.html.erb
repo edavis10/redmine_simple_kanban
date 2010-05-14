@@ -19,5 +19,9 @@
     <%= l(:field_assigned_to) %>: <%= link_to_user(issue.assigned_to) %>
     <%= avatar(issue.assigned_to, :size => "14") %>
   </p>
+  <% else %>
+  <p class="assigned-to">
+    <%= button_to(l(:simple_kanban_text_take_issue), take_issue_simple_kanban_path(:issue_id => issue.id), :method => :put) %>
+  </p>
   <% end %>
 <% end %>

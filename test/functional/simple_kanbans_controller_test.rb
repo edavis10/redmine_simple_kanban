@@ -116,4 +116,49 @@ class SimpleKanbansControllerTest < ActionController::TestCase
     should_not_set_the_flash
   end
 
+  context "PUT :take_issue" do
+    setup do
+      configure_plugin
+      @project_1 = Project.generate!
+      @issue = Issue.generate_for_project!(@project_1, :assigned_to => nil)
+      
+      @user = User.generate_with_protected!
+      @request.session[:user_id] = @user.id
+
+    end
+
+    context "for an issue the user can update" do
+      setup do
+        @role = Role.generate!(:permissions => [:view_issues])
+        @member = Member.generate!(:principal => @user, :project => @project_1, :roles => [@role])
+
+        put :take_issue, :issue_id => @issue.id
+      end
+
+      should_respond_with :redirect
+      should_redirect_to("kanban board") { simple_kanban_url }
+      should_set_the_flash_to /taken/i
+
+      should "assign the issue to the current user" do
+        @issue.reload
+        assert_equal @user, @issue.assigned_to
+      end
+    end
+
+    context "for an issue the user can't update" do
+      setup do
+        put :take_issue, :issue_id => @issue.id
+      end
+
+      should_respond_with :redirect
+      should_redirect_to("kanban board") { simple_kanban_url }
+      should_set_the_flash_to /could not be taken/i
+
+      should "not assign the issue to the current user" do
+        @issue.reload
+        assert_equal nil, @issue.assigned_to
+      end
+    end
+
+  end
 end

@@ -16,3 +16,7 @@ en:
   simple_kanban_text_next_issue_for: "Next Issue for {{user}}"
   simple_kanban_label_filter: Filter
   simple_kanban_label_filter_by: Filter by...
+  simple_kanban_text_take_issue: "Take issue"
+  simple_kanban_label_issue_taken: "Issue taken."
+  simple_kanban_label_issue_can_not_be_taken: "Issue could not be taken."
+

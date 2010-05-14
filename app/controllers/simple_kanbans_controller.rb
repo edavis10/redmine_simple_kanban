@@ -26,6 +26,25 @@ class SimpleKanbansController < ApplicationController
     end
   end
 
+  def take_issue
+    @issue = Issue.visible.find_by_id(params[:issue_id])
+
+    respond_to do |format|
+      if @issue && @issue.update_attribute(:assigned_to_id, User.current.id)
+        format.html {
+          flash[:notice] = l(:simple_kanban_label_issue_taken)
+          redirect_to simple_kanban_url
+        }
+      else
+        format.html {
+          flash[:error] = l(:simple_kanban_label_issue_can_not_be_taken)
+          redirect_to simple_kanban_url
+        }
+
+      end
+    end
+  end
+  
   private
 
   def status_id_for_swimlane(swimlane)
