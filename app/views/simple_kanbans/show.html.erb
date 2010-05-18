@@ -14,7 +14,7 @@
 
 <div style="clear:both;"></div>
 
-<%= render :partial => 'dashboard' %>
+<%= render :partial => 'dashboard', :locals => {:next_issue => @next_issue} %>
 
 <% content_for :header_tags do %>
   <%= stylesheet_link_tag 'redmine_simple_kanban.css', :plugin => "redmine_simple_kanban" %>

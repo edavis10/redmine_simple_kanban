@@ -2,15 +2,15 @@
 
 <%= render :partial => 'kanban_board' %>
 
-<div id="next-issue" class="<%= @next_issue.css_classes if @next_issue %> issue details">
+<div id="next-issue" class="<%= next_issue.css_classes if next_issue %> issue details">
   <div class="contextual">
   <%= link_to_function(l(:field_description), "jQuery('#next-issue div.description').toggle();") %>
   </div>
   <%= next_issue_title %>
-  <% if @next_issue %>
-  <%= content_tag(:h3, link_to_issue(@next_issue, :project => true)) %>
+  <% if next_issue %>
+  <%= content_tag(:h3, link_to_issue(next_issue, :project => true)) %>
   <div class="description" style="display:none;">
-    <%= textilizable(@next_issue, :description) %>
+    <%= textilizable(next_issue, :description) %>
   </div>
   <% else %>
   <p class="nodata"><%= l(:label_no_data) %></p>

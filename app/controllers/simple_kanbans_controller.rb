@@ -24,7 +24,7 @@ class SimpleKanbansController < ApplicationController
 
     respond_to do |format|
       format.html {}
-      format.js { render :partial => 'dashboard', :layout => false }
+      format.js { render :partial => 'dashboard', :layout => false, :locals => {:next_issue => @next_issue} }
     end
   end
 
