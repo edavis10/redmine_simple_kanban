@@ -18,7 +18,7 @@
 <%= render :partial => 'dashboard', :locals => {:next_issue => @next_issue} %>
 
 <div id="dialog-window" title="<%= l(:label_issue_new) -%>">
-  <%= render :partial => 'new_issue', :object => Issue.new %>
+  <%= render :partial => 'new_issue', :object => @issue %>
 </div>
 
 <% content_for :header_tags do %>
@@ -30,6 +30,7 @@
   <%= javascript_tag("jQuery.noConflict();") %>
   <%= javascript_include_tag 'simple-kanban.js', :plugin => 'redmine_simple_kanban' %>
   <%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
+  <%= javascript_tag "window._failed_creation = #{@issue.errors.count == 0 ? 'false' : 'true'}" %>
 <% end %>
 
 <% html_title l(:simple_kanban_title) %>

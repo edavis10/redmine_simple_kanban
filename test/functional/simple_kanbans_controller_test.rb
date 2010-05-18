@@ -172,4 +172,89 @@ class SimpleKanbansControllerTest < ActionController::TestCase
     end
 
   end
+
+  context "POST :new_issue" do
+    setup do
+      configure_plugin
+      IssuePriority.generate!(:is_default => true)
+      IssueStatus.generate!(:is_default => true)
+      @user = User.generate_with_protected!
+      @request.session[:user_id] = @user.id
+    end
+
+    context "with successful save" do
+      setup do
+        @count = Issue.count
+        post :new_issue, :issue => {
+          :subject => "Required",
+          :due_date => '2010-12-31',
+          :description => 'A description'
+        }
+      end
+      
+      should_respond_with :redirect
+      should_redirect_to("kanban board") { simple_kanban_url }
+      should_set_the_flash_to /success/i
+
+      context "new issue" do
+        setup do
+          @issue = Issue.last
+        end
+        
+        should "be saved" do
+          assert_equal @count +1, Issue.count, "Issue was not saved"
+        end
+
+        should "take the subject from the params" do
+          assert_equal "Required", @issue.subject
+        end
+        
+        should "take the description from the params" do
+          assert_equal "A description", @issue.description
+        end
+        
+        should "take the due date from the params" do
+          assert_equal "2010-12-31", @issue.due_date.to_s
+        end
+        
+        should "take the project from the plugin settings" do
+          assert_equal @target_project, @issue.project
+        end
+        
+        should "take the tracker from the first tracker on the project" do
+          assert_equal @target_project.trackers.first, @issue.tracker
+        end
+        
+      end
+    end
+
+    context "with an unsuccessful save" do
+      setup do
+        @count = Issue.count
+        post :new_issue, :issue => {:description => 'missing subject'}
+      end
+      
+      should_respond_with :success
+      should_render_template 'show'
+      should_set_the_flash_to /failed/i
+
+      context "new issue" do
+        should "not be saved" do
+          assert_equal @count, Issue.count, "Issue was saved"
+        end
+        
+        # TODO: must be a better test
+        should "display the dialog right away" do
+          assert_select 'head script', :text => /failed_creation = true/i
+        end
+        
+        should "fill in the issue form from the params" do
+          assert_select '#issue_description', :text => /missing subject/i
+        end
+      end
+      
+    end
+
+  end
+
 end

@@ -1,6 +1,6 @@
 <% labelled_tabular_form_for(:issue, new_issue,
-                             :url => {:action => 'update', :id => new_issue},
-                             :html => {:id => 'issue-form', :method => :put}) do |f| %>
+                             :url => new_issue_simple_kanban_path,
+                             :html => {:id => 'issue-form', :method => :post}) do |f| %>
 
 <div class="box">
   <p><%= f.text_field :subject, :size => 30, :required => true %></p>

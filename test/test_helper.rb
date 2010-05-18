@@ -11,8 +11,10 @@ class Test::Unit::TestCase
     @in_progress_status ||= IssueStatus.generate!(:name => 'In Progress')
     @acceptance_status ||= IssueStatus.generate!(:name => 'Acceptance')
     @done_status ||= IssueStatus.generate!(:name => 'Done')
+    @target_project ||= Project.generate!
     
     Setting.plugin_redmine_simple_kanban = {
+      'target_project' => @target_project.id.to_s,
       'backlog_swimlane' => {'status_id' => @backlog_status.id.to_s},
       'next_swimlane' => {'status_id' => @next_status.id.to_s},
       'in_progress_swimlane' => {'status_id' => @in_progress_status.id.to_s},

@@ -21,7 +21,8 @@ class SimpleKanbansController < ApplicationController
       @next_issue = SimpleKanban.next_issue(@filtered_user)
     end
     
-
+    @issue ||= Issue.new
+    
     respond_to do |format|
       format.html {}
       format.js { render :partial => 'dashboard', :layout => false, :locals => {:next_issue => @next_issue} }
@@ -39,12 +40,38 @@ class SimpleKanbansController < ApplicationController
         }
       else
         format.html {
-          flash[:error] = l(:simple_kanban_label_issue_can_not_be_taken)
+          flash.now[:error] = l(:simple_kanban_label_issue_can_not_be_taken)
           redirect_to simple_kanban_url
         }
 
       end
     end
+  end
+
+  def new_issue
+    @issue = Issue.new(params[:issue]) do |issue|
+      issue.author = User.current
+      project = Project.find(target_project)
+      issue.project = project
+      issue.tracker = project.trackers.first if project.trackers.present?
+    end
+
+    respond_to do |format|
+      if @issue.save
+        format.html {
+          flash[:notice] = l(:notice_successful_create)
+          redirect_to simple_kanban_url
+        }
+      else
+        format.html {
+          flash[:error] = l(:simple_kanban_error_failed_to_create)
+          show
+          render :action => 'show'
+        }
+
+      end
+    end
+
   end
   
   private
@@ -57,6 +84,14 @@ class SimpleKanbansController < ApplicationController
       Setting.plugin_redmine_simple_kanban[swimlane]['status_id']
     else
       0
+    end
+  end
+
+  def target_project
+    if Setting.plugin_redmine_simple_kanban && Setting.plugin_redmine_simple_kanban['target_project'].present?
+      Setting.plugin_redmine_simple_kanban['target_project']
+    else
+      nil
     end
   end
 end

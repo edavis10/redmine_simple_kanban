@@ -24,8 +24,7 @@ jQuery(function($) {
                $(this).dialog("close");
              },
              "OK": function() {
-               alert('OK');
-               $(this).dialog("close");
+               $('#issue-form').submit();
              }
            });
 
@@ -33,5 +32,10 @@ jQuery(function($) {
     $('#dialog-window').dialog('open');
     return false;
   });
+
+  // Open the dialog if there was an error saving it on the last request
+  if (window._failed_creation) {
+    $('#dialog-window').dialog('open');
+  }
 
 });

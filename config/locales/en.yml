@@ -22,3 +22,4 @@ en:
   simple_kanban_label_issue_taken: "Issue taken."
   simple_kanban_label_issue_can_not_be_taken: "Issue could not be taken."
   simple_kanban_label_target_project: "Target Project"
+  simple_kanban_error_failed_to_create: "Failed creation."
