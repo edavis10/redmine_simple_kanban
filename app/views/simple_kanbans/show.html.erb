@@ -17,7 +17,8 @@
 
 <%= render :partial => 'dashboard', :locals => {:next_issue => @next_issue} %>
 
-<div id="dialog-window" title="<%= l(:field_issue) -%>">Hello
+<div id="dialog-window" title="<%= l(:label_issue_new) -%>">
+  <%= render :partial => 'new_issue', :object => Issue.new %>
 </div>
 
 <% content_for :header_tags do %>

@@ -1,0 +1,18 @@
+<% labelled_tabular_form_for(:issue, new_issue,
+                             :url => {:action => 'update', :id => new_issue},
+                             :html => {:id => 'issue-form', :method => :put}) do |f| %>
+
+<div class="box">
+  <p><%= f.text_field :subject, :size => 30, :required => true %></p>
+
+  <p><%= f.text_area :description,
+                     :cols => 40,
+                     :rows => (new_issue.description.blank? ? 10 : [[10, new_issue.description.length / 50].max, 100].min),
+                     :accesskey => accesskey(:edit),
+                     :class => 'wiki-edit' %></p>
+  <%= wikitoolbar_for 'issue_description' %>
+
+  <p><%= f.text_field :due_date, :size => 10 %><%= calendar_for('issue_due_date') %></p>
+
+</div>
+<% end %>
