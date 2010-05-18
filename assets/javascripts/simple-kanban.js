@@ -15,4 +15,23 @@ jQuery(function($) {
             }});
     });
 
+  $("#dialog-window").dialog({ autoOpen: false, modal: true, width: 600 });
+
+  $('#dialog-window').
+    dialog("option","buttons",
+           {
+             "Cancel": function() {
+               $(this).dialog("close");
+             },
+             "OK": function() {
+               alert('OK');
+               $(this).dialog("close");
+             }
+           });
+
+  $('#new-issue-dialog').click(function() {
+    $('#dialog-window').dialog('open');
+    return false;
+  });
+
 });
