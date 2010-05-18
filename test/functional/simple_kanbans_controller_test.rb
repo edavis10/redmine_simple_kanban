@@ -6,6 +6,11 @@ class SimpleKanbansControllerTest < ActionController::TestCase
       configure_plugin
       @project_1 = Project.generate!
       @project_2 = Project.generate!
+
+      @backlog_1 = Issue.generate_for_project!(@project_1, :status => @backlog_status)
+      @backlog_2 = Issue.generate_for_project!(@project_1, :status => @backlog_status)
+      @backlog_3 = Issue.generate_for_project!(@project_2, :status => @backlog_status)
+      @backlog_issues = [@backlog_1, @backlog_2, @backlog_3]
       
       @next_1 = Issue.generate_for_project!(@project_1, :status => @next_status)
       @next_2 = Issue.generate_for_project!(@project_2, :status => @next_status)
@@ -39,6 +44,7 @@ class SimpleKanbansControllerTest < ActionController::TestCase
     should_render_template :show
     should_not_set_the_flash
 
+    should_assign_to(:backlog_issues) {@backlog_issues}
     should_assign_to(:next_issues) {@next_issues}
     should_assign_to(:in_progress_issues) {@in_progress_issues}
     should_assign_to(:acceptance_issues) {@acceptance_issues}
@@ -63,6 +69,10 @@ class SimpleKanbansControllerTest < ActionController::TestCase
       @member = Member.generate!(:principal => @user, :project => @project_2, :roles => [@role])
       Member.generate!(:principal => @filtered_user, :project => @project_2, :roles => [@role])
 
+      @backlog_1 = Issue.generate_for_project!(@project_1, :status => @backlog_status)
+      @backlog_2 = Issue.generate_for_project!(@project_1, :status => @backlog_status, :assigned_to => @user)
+      @backlog_3 = Issue.generate_for_project!(@project_2, :status => @backlog_status, :assigned_to => @filtered_user)
+      
       @next_1 = Issue.generate_for_project!(@project_1, :status => @next_status)
       @next_2 = Issue.generate_for_project!(@project_2, :status => @next_status, :assigned_to => @filtered_user)
       @next_3 = Issue.generate_for_project!(@project_2, :status => @next_status, :assigned_to => @user) # filtered
@@ -85,6 +95,7 @@ class SimpleKanbansControllerTest < ActionController::TestCase
     should_render_template :show
     should_not_set_the_flash
 
+    should_assign_to(:backlog_issues) { [@backlog_1, @backlog_3] }
     should_assign_to(:next_issues) { [@next_1, @next_2, @next_4] }
     should_assign_to(:in_progress_issues) { [@progress_2] }
     should_assign_to(:acceptance_issues) { [@acceptance_1] }

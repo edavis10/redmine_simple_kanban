@@ -4,7 +4,7 @@
 #acceptance-swimlane {}
 #done-swimlane {}
 
-.swimlane {background: #eee; border: #444 solid 2px; width: 25%; float: left; min-height: 400px; margin: 0 -2px;}
+.swimlane {background: #eee; border: #444 solid 2px; width: 20%; float: left; min-height: 400px; margin: 0 -2px;}
 .swimlane h3 { margin: 0 10px; }
 .swimlane div { margin: 10px; }
 

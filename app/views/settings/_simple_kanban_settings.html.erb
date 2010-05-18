@@ -22,6 +22,7 @@ end
 
   <%= content_tag(:p, l(:simple_kanban_text_swimlane_settings_description)) %>
 
+  <%= issue_status_swimlane('backlog_swimlane') %>
   <%= issue_status_swimlane('next_swimlane') %>
   <%= issue_status_swimlane('in_progress_swimlane') %>
   <%= issue_status_swimlane('acceptance_swimlane') %>

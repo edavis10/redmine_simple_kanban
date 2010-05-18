@@ -5,6 +5,7 @@ en:
   simple_kanban_text_general_settings: Settings
   simple_kanban_text_swimlane_settings_description: "Select the Issue Status to use for each swimlane on the Kanban Board."
   simple_kanban_text_target_project_description: "Select the target project for new issues."
+  simple_kanban_label_backlog_swimlane: "Backlog Swimlane"
   simple_kanban_label_next_swimlane: "Next Swimlane"
   simple_kanban_label_in_progress_swimlane: "In Progress Swimlane"
   simple_kanban_label_acceptance_swimlane: "Acceptance Swimlane"
