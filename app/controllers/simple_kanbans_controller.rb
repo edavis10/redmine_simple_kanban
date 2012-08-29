@@ -1,5 +1,6 @@
 class SimpleKanbansController < ApplicationController
   unloadable
+  before_filter :authorize_global
 
   def show
     if params[:filter].blank?

@@ -26,7 +26,12 @@ Redmine::Plugin.register :redmine_simple_kanban do
   menu(:top_menu,
        :simple_kanban,
        {:controller => 'simple_kanbans', :action => 'show'},
-       :caption => :simple_kanban_title)
+       :caption => :simple_kanban_title,
+       :if => Proc.new {
+         User.current.allowed_to?(:use_kanban, nil, :global => true)
+       })
+
+  permission(:use_kanban, {:simple_kanbans => [:show, :take_issue, :new_issue]})
 
 end
 require 'redmine_simple_kanban/hooks/view_issues_form_details_bottom_hook'
