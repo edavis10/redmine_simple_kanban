@@ -3,14 +3,14 @@
     <%= content_tag(:h3, l(:simple_kanban_label_backlog_swimlane)) %>
     <div>
       <%= render :partial => 'issue', :collection => @backlog_issues %>
-    </div
+    </div>
   </div>
 
   <div class="swimlane" id="next-swimlane">
     <%= content_tag(:h3, l(:simple_kanban_label_next_swimlane)) %>
     <div>
       <%= render :partial => 'issue', :collection => @next_issues %>
-    </div
+    </div>
   </div>
 
   <div class="swimlane" id="in-progress-swimlane">
