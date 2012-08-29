@@ -11,7 +11,7 @@
   <% end %>
 
   <p>
-    <%= link_to_issue(issue) %>
+    <%= link_to_issue(issue, :project => true) %>
   </p>
 
   <% if issue.assigned_to.present? %>
