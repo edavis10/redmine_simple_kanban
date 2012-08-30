@@ -5,7 +5,7 @@ class SimpleKanbansController < ApplicationController
   def show
     if params[:filter].blank?
       # Next uses different finders
-      @next_issues = Issue.visible.order_for_simple_kanban_next.includes_for_simple_kanban.with_status_id(status_id_for_swimlane('next_swimlane')).all(:limit => 3)
+      @next_issues = Issue.visible.order_for_simple_kanban_next.includes_for_simple_kanban.with_status_id(status_id_for_swimlane('next_swimlane')).all
       @backlog_issues = Issue.for_simple_kanban_swimlane(status_id_for_swimlane('backlog_swimlane'))
       @in_progress_issues = Issue.for_simple_kanban_swimlane(status_id_for_swimlane('in_progress_swimlane'))
       @acceptance_issues = Issue.for_simple_kanban_swimlane(status_id_for_swimlane('acceptance_swimlane'))
@@ -14,7 +14,7 @@ class SimpleKanbansController < ApplicationController
     else
       @filtered_user = User.find(params[:filter])
       # Next uses different finders
-      @next_issues = Issue.visible.order_for_simple_kanban_next.includes_for_simple_kanban.with_status_id(status_id_for_swimlane('next_swimlane')).assigned_to(params[:filter]).all(:limit => 3)
+      @next_issues = Issue.visible.order_for_simple_kanban_next.includes_for_simple_kanban.with_status_id(status_id_for_swimlane('next_swimlane')).assigned_to(params[:filter]).all
       @backlog_issues = Issue.for_simple_kanban_swimlane(status_id_for_swimlane('backlog_swimlane')).assigned_to(params[:filter])
       @in_progress_issues = Issue.for_simple_kanban_swimlane(status_id_for_swimlane('in_progress_swimlane')).assigned_to(params[:filter])
       @acceptance_issues = Issue.for_simple_kanban_swimlane(status_id_for_swimlane('acceptance_swimlane')).assigned_to(params[:filter])
