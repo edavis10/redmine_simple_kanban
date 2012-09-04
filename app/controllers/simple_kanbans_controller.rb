@@ -21,7 +21,13 @@ class SimpleKanbansController < ApplicationController
       @done_issues = Issue.for_simple_kanban_swimlane(status_id_for_swimlane('done_swimlane')).updated_today.assigned_to(params[:filter])
       @next_issue = SimpleKanban.next_issue(@filtered_user)
     end
-    
+
+    @backlog_issues = @backlog_issues.group_by(&:project)
+    @next_issues = @next_issues.group_by(&:project)
+    @in_progress_issues = @in_progress_issues.group_by(&:project)
+    @acceptance_issues = @acceptance_issues.group_by(&:project)
+    @done_issues = @done_issues.group_by(&:project)
+
     @issue ||= Issue.new
     
     respond_to do |format|

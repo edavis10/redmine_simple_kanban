@@ -2,35 +2,50 @@
   <div class="swimlane" id="backlog-swimlane">
     <%= content_tag(:h3, l(:simple_kanban_label_backlog_swimlane)) %>
     <div>
-      <%= render :partial => 'issue', :collection => @backlog_issues %>
+      <% @backlog_issues.each do |project, issues| %>
+        <%= content_tag(:h4, link_to_project(project)) %>
+        <%= render :partial => 'issue', :collection => issues %>
+      <% end %>
     </div>
   </div>
 
   <div class="swimlane" id="next-swimlane">
     <%= content_tag(:h3, l(:simple_kanban_label_next_swimlane)) %>
     <div>
-      <%= render :partial => 'issue', :collection => @next_issues %>
+      <% @next_issues.each do |project, issues| %>
+        <%= content_tag(:h4, link_to_project(project)) %>
+        <%= render :partial => 'issue', :collection => issues %>
+      <% end %>
     </div>
   </div>
 
   <div class="swimlane" id="in-progress-swimlane">
     <%= content_tag(:h3, l(:simple_kanban_label_in_progress_swimlane)) %>
     <div>
-      <%= render :partial => 'issue', :collection => @in_progress_issues %>
+      <% @in_progress_issues.each do |project, issues| %>
+        <%= content_tag(:h4, link_to_project(project)) %>
+        <%= render :partial => 'issue', :collection => issues %>
+      <% end %>
     </div>
   </div>
 
   <div class="swimlane" id="acceptance-swimlane">
     <%= content_tag(:h3, l(:simple_kanban_label_acceptance_swimlane)) %>
     <div>
-      <%= render :partial => 'issue', :collection => @acceptance_issues %>
+      <% @acceptance_issues.each do |project, issues| %>
+        <%= content_tag(:h4, link_to_project(project)) %>
+        <%= render :partial => 'issue', :collection => issues %>
+      <% end %>
     </div>
   </div>
 
   <div class="swimlane" id="done-swimlane">
     <%= content_tag(:h3, l(:simple_kanban_label_done_swimlane)) %>
     <div>
-      <%= render :partial => 'issue', :collection => @done_issues %>
+      <% @done_issues.each do |project, issues| %>
+        <%= content_tag(:h4, link_to_project(project)) %>
+        <%= render :partial => 'issue', :collection => issues %>
+      <% end %>
     </div>
   </div>
 
