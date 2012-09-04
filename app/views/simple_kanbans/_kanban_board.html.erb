@@ -1,6 +1,6 @@
 <div id="kanban-board">
   <div class="swimlane" id="backlog-swimlane">
-    <%= content_tag(:h3, l(:simple_kanban_label_backlog_swimlane)) %>
+    <%= swimlane_label(:simple_kanban_label_backlog_swimlane, @backlog_issues) %>
     <div>
       <% @backlog_issues.each do |project, issues| %>
         <%= content_tag(:h4, link_to_project(project)) %>
@@ -10,7 +10,7 @@
   </div>
 
   <div class="swimlane" id="next-swimlane">
-    <%= content_tag(:h3, l(:simple_kanban_label_next_swimlane)) %>
+    <%= swimlane_label(:simple_kanban_label_next_swimlane, @next_issues) %>
     <div>
       <% @next_issues.each do |project, issues| %>
         <%= content_tag(:h4, link_to_project(project)) %>
@@ -20,7 +20,7 @@
   </div>
 
   <div class="swimlane" id="in-progress-swimlane">
-    <%= content_tag(:h3, l(:simple_kanban_label_in_progress_swimlane)) %>
+    <%= swimlane_label(:simple_kanban_label_in_progress_swimlane, @in_progress_issues) %>
     <div>
       <% @in_progress_issues.each do |project, issues| %>
         <%= content_tag(:h4, link_to_project(project)) %>
@@ -30,7 +30,7 @@
   </div>
 
   <div class="swimlane" id="acceptance-swimlane">
-    <%= content_tag(:h3, l(:simple_kanban_label_acceptance_swimlane)) %>
+    <%= swimlane_label(:simple_kanban_label_acceptance_swimlane, @acceptance_issues) %>
     <div>
       <% @acceptance_issues.each do |project, issues| %>
         <%= content_tag(:h4, link_to_project(project)) %>
@@ -40,7 +40,7 @@
   </div>
 
   <div class="swimlane" id="done-swimlane">
-    <%= content_tag(:h3, l(:simple_kanban_label_done_swimlane)) %>
+    <%= swimlane_label(:simple_kanban_label_done_swimlane, @done_issues) %>
     <div>
       <% @done_issues.each do |project, issues| %>
         <%= content_tag(:h4, link_to_project(project)) %>
